@@ -6,4 +6,7 @@ A Binary Search Tree (BST) is a tree in which all the nodes follow these propert
 	- The right sub-tree of a node has a key greater than to its parent node's key
 
 left_subtree (keys)  ≤  node (key)  ≤  right_subtree (keys)
-.
+
+
+<img src="https://en.wikipedia.org/wiki/Binary_search_tree#/media/File:Binary_search_tree.svg alt="binary search tree" />"
+
