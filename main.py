@@ -1,6 +1,6 @@
 # Binary Search Driver Program
 
-from BST import BST
+from bst import BST
 import random
 
 
