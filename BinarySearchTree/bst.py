@@ -49,6 +49,7 @@ class BST:
             else:  # if node does not have node to the left...
                 # ... add the new node in the left position
                 node_ptr.left = self.create_leaf(value)
+                node_ptr.left.parent = node_ptr
         elif value > node_ptr.value:  # move down the right of the tree
             if node_ptr.right is not None:  # if node has a node on the right
                 # ... continue moving down right of the tree
@@ -58,6 +59,7 @@ class BST:
             else:  # if node does not have a node to the right...
                 # ... create new node on the right of the current node
                 node_ptr.right = self.create_leaf(value)
+                node_ptr.right.parent = node_ptr
         else:
             print('Value already exists in tree')
 
@@ -132,3 +134,83 @@ class BST:
         print(node_ptr.value, end=" ")  # print node value
         if node_ptr.right is not None:  # node to the right exists
             self._print_order(node_ptr.right)  # move down right
+
+    def find(self, value):
+        """
+        find a node given a value
+        param value: value of node to find
+        return: node object if found or None
+        """
+        if self.root is not None:
+            return self._find(value, self.root)
+        return None
+
+    def _find(self, value, node_ptr):
+        """
+        recursive function to find node in tree
+        param value: value to find
+        param node_ptr: pointer to current node
+        """
+        if node_ptr.value == value:  # if current node has search value
+            return node_ptr  # return pointer to current node
+        # if value is less than current node value ...
+        # ... and current node has a left child
+        if value < node_ptr.value and node_ptr.left is not None:
+            return self._find(value, node_ptr.left)  # recursive call to find
+        # if value is greater than current node value ...
+        # ... and current node has a child to the right
+        elif value > node_ptr.value and node_ptr.right is not None:
+            return self._find(value, node_ptr.right)  # recursive call to find
+        return None
+
+    def find_min_value(self, value):
+        pass
+
+    def delete(self, value):
+        """
+        delete node from tree.
+        Three cases:
+        1. Deleting a leaf node
+        2. Deleting a node with a single child node
+        3. Deleting a node with two child nodes
+        param value: value to delete if exists
+        param node_ptr: pointer to current node
+        """
+        node = self.find(value)
+        print(node, node.value)
+        # node is a leaf node if left and right pointers are None
+        if node.left is None and node.right is None:
+            self.delete_leaf(node)
+        # node has a single child on the left
+        elif node.right is None:
+            self.delete_node_single_child(node, has_left_child=True)
+        # node has a single child on the right
+        elif node.left is None:
+            self.delete_node_single_child(node, has_left_child=False)
+        else:
+            self.delete_node_two_children(node)
+
+    def delete_leaf(self, node):
+        """
+        Deletion case 1. Delete if node is leaf
+        param node: leaf node to delete
+        """
+        if node.parent.left == node:
+            node.parent.left = None
+        elif node.parent.right == node:
+            node.parent.right = None
+        node = None
+
+    def delete_node_single_child(self, node, has_left_child):
+        """
+        Delete a node that has only one child
+        param node: node to be deleted
+        param has_left_child: bool indicating if child is on left or right
+        """
+        if has_left_child:
+            node.parent.left = node.left
+        else:
+            node.parent.right = node.right
+
+    def delete_node_two_children(node):
+        print('Delete node with two children')
