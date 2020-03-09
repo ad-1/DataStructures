@@ -1,7 +1,15 @@
+# Data Structures - Binary Search Tree
+
+""" Tree Node """
+
+
 class Node:
-    """ Node for binary search tree """
 
     def __init__(self, value=None):
-        self.value = value
-        self.left = None
-        self.right = None
+        """
+        initialise node
+        param value:  value for the node
+        """
+        self.value = value  # node value
+        self.left = None  # value to left of node (less than value)
+        self.right = None  # value to right of node (greater than value)
