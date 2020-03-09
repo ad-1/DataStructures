@@ -8,7 +8,7 @@ import random
 if __name__ == '__main__':
 
     # number of values between upper and lower limits
-    lower, upper, n_val = 1, 1000, 100
+    lower, upper, n_val = 1, 101, 100
 
     # value used to test search method in bst
     search_val = random.randint(lower, upper)
@@ -25,3 +25,5 @@ if __name__ == '__main__':
     bst.print_order()  # print all values in order
     print('\n\nheight of binary tree: ', bst.height())
     print('\nfound: {} : {}\n'.format(search_val, bst.search(search_val)))
+
+    bst.delete(search_val)  # test deletion
